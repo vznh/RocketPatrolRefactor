@@ -1,3 +1,6 @@
+// Jason Son
+// Rocket Patrol but as historically accurate as humanly possible
+
 let config = {
     type: Phaser.AUTO,
     width: 640,

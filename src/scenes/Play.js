@@ -79,6 +79,23 @@ class Play extends Phaser.Scene {
       10,
     ).setOrigin(0, 0);
 
+    this.apollo01 = new Apollo(
+      this,
+      game.config.width,
+      borderUISize * 5,
+      "apollo",
+      0,
+      15
+    );
+    this.apollo02 = new Apollo(
+      this,
+      game.config.width,
+      borderUISize * 6,
+      "apollo",
+      0,
+      25
+    );
+
     // define keys
     keyFIRE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F);
     keyRESET = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R);
@@ -156,6 +173,8 @@ class Play extends Phaser.Scene {
       this.ship01.update(); // update spaceships (x3)
       this.ship02.update();
       this.ship03.update();
+      this.apollo01.update();
+      this.apollo02.update();
     }
 
     // check collisions
@@ -171,6 +190,22 @@ class Play extends Phaser.Scene {
       this.p1Rocket.reset();
       this.shipExplode(this.ship01);
     }
+
+    const ships = [this.ship01, this.ship02, this.ship03];
+    ships.forEach(ship => {
+      if (this.checkCollsion(this.p1Rocket, ship)) {
+        this.p1Rocket.reset();
+        this.shipExplode(ship);
+      }
+    })
+
+    const apollos = [this.apollo01, this.apollo02];
+    apollos.forEach(apollo => {
+      if (this.checkCollision(this.p1Rocket, apollo)) {
+        this.p1Rocket.reset();
+        this.apolloExplode(apollo);
+      }
+    });
   }
 
   checkCollision(rocket, ship) {
@@ -203,6 +238,21 @@ class Play extends Phaser.Scene {
     this.p1Score += ship.points;
     this.scoreLeft.text = this.p1Score;
 
+    this.sound.play("sfx-explosion");
+  }
+
+  apolloExplode(ship) {
+    ship.alpha = 0;
+    let boom = this.add.sprite(ship.x, ship.y, "explosion").setOrigin(0, 0);
+    boom.anims.play("explode");
+    boom.on("animationcomplete", () => {
+      ship.reset();
+      ship.alpha = 1;
+      boom.destroy();
+    });
+
+    this.p1Score += ship.points * 2;
+    this.scoreLeft.text = this.p1Score;
     this.sound.play("sfx-explosion");
   }
 }
