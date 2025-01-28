@@ -193,7 +193,7 @@ class Play extends Phaser.Scene {
 
     const ships = [this.ship01, this.ship02, this.ship03];
     ships.forEach(ship => {
-      if (this.checkCollsion(this.p1Rocket, ship)) {
+      if (this.checkCollision(this.p1Rocket, ship)) {
         this.p1Rocket.reset();
         this.shipExplode(ship);
       }

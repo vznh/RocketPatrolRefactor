@@ -78,7 +78,7 @@ class Menu extends Phaser.Scene {
       .text(
         game.config.width / 2,
         game.config.height / 2 + borderUISize * 2 + borderPadding * 2,
-        "Press M for Mouse or K for Keyboard",
+        "Press M for Mouse or K for Keyboard Control",
         menuConfig,
       )
       .setOrigin(0.5);
