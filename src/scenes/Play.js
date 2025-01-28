@@ -236,6 +236,7 @@ class Play extends Phaser.Scene {
     });
     // score add and text update
     this.p1Score += ship.points;
+    game.settings.gameTimer += 5000;
     this.scoreLeft.text = this.p1Score;
 
     this.sound.play("sfx-explosion");
@@ -252,6 +253,7 @@ class Play extends Phaser.Scene {
     });
 
     this.p1Score += ship.points * 2;
+    game.settings.gameTimer += 7500;
     this.scoreLeft.text = this.p1Score;
     this.sound.play("sfx-explosion");
   }

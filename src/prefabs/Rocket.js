@@ -8,33 +8,53 @@ class Rocket extends Phaser.GameObjects.Sprite {
     this.moveSpeed = 2; // rocket speed in pixels/frame
 
     this.sfxShot = scene.sound.add("sfx-shot");
+
+    this.setInteractive();
+    this.on('pointerdown', () => this.fire());
   }
 
   update() {
-    // left/right movement
-    if (!this.isFiring) {
-      if (keyLEFT.isDown && this.x >= borderUISize + this.width) {
-        this.x -= this.moveSpeed;
-      } else if (
-        keyRIGHT.isDown &&
-        this.x <= game.config.width - borderUISize - this.width
-      ) {
-        this.x += this.moveSpeed;
+    // movement based on control type
+    if (game.settings.controlType === 'keyboard') {
+      if (!this.isFiring) {
+        if (keyLEFT.isDown && this.x >= borderUISize + this.width) {
+          this.x -= this.moveSpeed;
+        } else if (keyRIGHT.isDown && this.x <= game.config.width - borderUISize - this.width) {
+          this.x += this.moveSpeed;
+        }
+      }
+      if (Phaser.Input.Keyboard.JustDown(keyFIRE)) {
+        this.fire();
+      }
+    } else if (game.settings.controlType === 'mouse') {
+      this.x = this.scene.input.x; // Move to mouse position
+      this.x = Phaser.Math.Clamp(this.x, borderUISize + this.width, game.config.width - borderUISize - this.width);
+
+      if (this.scene.input.activePointer.isDown) {
+        this.fire();
       }
     }
-    // fire button
-    if (Phaser.Input.Keyboard.JustDown(keyFIRE) && !this.isFiring) {
+
+    // actively managing rocket movement when fired
+    this.handleFiring();
+  }
+
+
+  // abstracted method
+  fire() {
+    if (!this.isFiring) {
       this.isFiring = true;
       this.sfxShot.play();
     }
-    // if fired, move up
+  }
+
+  handleFiring() {
     if (this.isFiring && this.y >= borderUISize * 3 + borderPadding) {
       this.y -= this.moveSpeed;
     }
-    // reset on miss
+
     if (this.y <= borderUISize * 3 + borderPadding) {
-      this.isFiring = false;
-      this.y = game.config.height - borderUISize - borderPadding;
+      this.reset();
     }
   }
 

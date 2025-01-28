@@ -1,5 +1,10 @@
 // Jason Son
 // Rocket Patrol but as historically accurate as humanly possible
+// 2 hours
+// Create a new enemy spaceship type: see Apollo.js (5)
+// New timing/scoring mechanism that adds time to the counter if successful hit. Else, loses time. More time attributed if Apollo hit. (5)
+// Implemented mouse control for player movement and left click to fire. (5)
+//
 
 let config = {
     type: Phaser.AUTO,

@@ -1,6 +1,6 @@
 // Falls under the 5-Point Tier category.
 // Inspiration taken from Apollo launches.
-// NOTE NEEDS NEW TEXTURE SKIN
+// ! NOTE NEEDS NEW TEXTURE SKIN
 // Son J. W25 CMPM120
 
 class Apollo extends Phase.GameObjects.Sprite {

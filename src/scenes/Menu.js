@@ -73,9 +73,20 @@ class Menu extends Phaser.Scene {
       )
       .setOrigin(0.5);
 
+    this.add
+      .text(
+        game.config.width / 2,
+        game.config.height / 2 + borderUISize * 2 + borderPadding * 2,
+        "Press M for Mouse Control or K for Keyboard Control",
+        menuConfig,
+      )
+      .setOrigin(0.5);
+
     // define keys
     keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
     keyRIGHT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
+    keyMOUSE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.M);
+    keyKEYBOARD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.K);
   }
 
   update() {
@@ -84,7 +95,7 @@ class Menu extends Phaser.Scene {
       game.settings = {
         spaceshipSpeed: 3,
         apolloSpeed: 4,
-        gameTimer: 60000,
+        controlType: 'keyboard',
       };
       this.sound.play("sfx-select");
       this.scene.start("playScene");
@@ -94,8 +105,18 @@ class Menu extends Phaser.Scene {
       game.settings = {
         spaceshipSpeed: 4,
         apolloSpeed: 6
-        gameTimer: 45000,
+        controlType: 'keyboard',
       };
+      this.sound.play("sfx-select");
+      this.scene.start("playScene");
+    }
+    if (Phaser.Input.Keyboard.JustDown(keyMOUSE)) {
+      game.settings.controlType = 'mouse';
+      this.sound.play("sfx-select");
+      this.scene.start("playScene");
+    }
+    if (Phaser.Input.Keyboard.JustDown(keyKEYBOARD)) {
+      game.settings.controlType = 'keyboard';
       this.sound.play("sfx-select");
       this.scene.start("playScene");
     }
