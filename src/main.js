@@ -14,6 +14,12 @@ let config = {
 }
 
 let game = new Phaser.Game(config)
+game.settings = {
+  spaceshipSpeed: 3,
+  apolloSpeed: 4,
+  gameTimer: 60000,
+  controlType: 'keyboard'
+};
 
 // set UI sizes
 let borderUISize = game.config.height / 15
