@@ -177,25 +177,15 @@ class Play extends Phaser.Scene {
       this.apollo02.update();
     }
 
-    // check collisions
-    if (this.checkCollision(this.p1Rocket, this.ship03)) {
-      this.p1Rocket.reset();
-      this.shipExplode(this.ship03);
-    }
-    if (this.checkCollision(this.p1Rocket, this.ship02)) {
-      this.p1Rocket.reset();
-      this.shipExplode(this.ship02);
-    }
-    if (this.checkCollision(this.p1Rocket, this.ship01)) {
-      this.p1Rocket.reset();
-      this.shipExplode(this.ship01);
-    }
+    let hitDetected = false;
 
+    // check collisions
     const ships = [this.ship01, this.ship02, this.ship03];
     ships.forEach(ship => {
       if (this.checkCollision(this.p1Rocket, ship)) {
         this.p1Rocket.reset();
         this.shipExplode(ship);
+        hitDetected = true;
       }
     })
 
@@ -204,8 +194,17 @@ class Play extends Phaser.Scene {
       if (this.checkCollision(this.p1Rocket, apollo)) {
         this.p1Rocket.reset();
         this.apolloExplode(apollo);
+        hitDetected = true;
       }
     });
+
+    if (!hitDetected) {
+      game.settings.gameTimer -= 1000;
+
+      if (game.settings.gameTimer < 0) {
+        game.settings.gameTimer = 0;
+      }
+    }
   }
 
   checkCollision(rocket, ship) {
