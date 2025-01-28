@@ -3,7 +3,7 @@
 // ! NOTE NEEDS NEW TEXTURE SKIN
 // Son J. W25 CMPM120
 
-class Apollo extends Phase.GameObjects.Sprite {
+class Apollo extends Phaser.GameObjects.Sprite {
   constructor(
     scene,
     x, y,
