@@ -8,6 +8,7 @@ class Menu extends Phaser.Scene {
     this.load.image("rocket", "./assets/rocket.png");
     this.load.image("spaceship", "./assets/spaceship.png");
     this.load.image("starfield", "./assets/starfield.png");
+    this.load.image("apollo", "./assets/rocket.png");
     // load spritesheet
     this.load.spritesheet("explosion", "./assets/explosion.png", {
       frameWidth: 64,
@@ -77,7 +78,7 @@ class Menu extends Phaser.Scene {
       .text(
         game.config.width / 2,
         game.config.height / 2 + borderUISize * 2 + borderPadding * 2,
-        "Press M for Mouse Control or K for Keyboard Control",
+        "Press M for Mouse or K for Keyboard",
         menuConfig,
       )
       .setOrigin(0.5);
