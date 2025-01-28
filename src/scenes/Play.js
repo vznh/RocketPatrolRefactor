@@ -154,6 +154,17 @@ class Play extends Phaser.Scene {
       null,
       this,
     );
+
+    this.particleEmitter = this.add.particles('explosion').createEmitter({
+      speed:100,
+      lifespan: 500,
+      blendMode: 'ADD',
+      frequency: -1,
+      emitZone: {
+        type: 'random',
+        source: new Phaser.Geom.Rectangle(0, 0, 0, 0)
+      }
+    });
   }
 
   update() {
@@ -237,6 +248,10 @@ class Play extends Phaser.Scene {
     this.p1Score += ship.points;
     game.settings.gameTimer += 5000;
     this.scoreLeft.text = this.p1Score;
+
+    // add particle emitter
+    this.particleEmitter.setPosition(ship.x, ship.y);
+    this.particleEmitter.explode(30);
 
     this.sound.play("sfx-explosion");
   }
