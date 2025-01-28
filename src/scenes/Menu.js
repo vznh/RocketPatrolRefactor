@@ -104,7 +104,7 @@ class Menu extends Phaser.Scene {
       // hard mode
       game.settings = {
         spaceshipSpeed: 4,
-        apolloSpeed: 6
+        apolloSpeed: 6,
         controlType: 'keyboard',
       };
       this.sound.play("sfx-select");
