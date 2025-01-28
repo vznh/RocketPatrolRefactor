@@ -4,7 +4,8 @@
 // Create a new enemy spaceship type: see Apollo.js (5) and is worth 50 points due to it's small stature and fast speed
 // New timing/scoring mechanism that adds time to the counter if successful hit. Else, loses time. More time attributed if Apollo hit. (5)
 // Implemented mouse control for player movement and left click to fire. (5)
-//
+// Particles created when a ship detects collision (5)
+// Played for maximum 20 points.
 
 let config = {
     type: Phaser.AUTO,
